@@ -1,4 +1,7 @@
-import { Platform } from './platform'
+import {
+    Platform
+
+} from './gameObjects/platform'
 
 let canvas = document.getElementById('canvas') as HTMLCanvasElement;
 
