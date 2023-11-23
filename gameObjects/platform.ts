@@ -4,27 +4,37 @@ export class Platform {
     private readonly _yPosition: number;
     private readonly _width: number;
     private readonly _height: number;
+    private readonly _windowWidth: number;
+    private readonly _windowHeight: number;
     private readonly _radii: number;
     private readonly _context: CanvasRenderingContext2D;
 
     constructor(xPosition: number, yPosition: number, width: number,
-                height: number, radii: number, context: CanvasRenderingContext2D) {
+                height: number, windowWidth: number, windowHeight: number,
+                radii: number, context: CanvasRenderingContext2D) {
         this._xPosition = xPosition;
         this._yPosition = yPosition;
         this._width = width;
         this._height = height;
+        this._windowWidth = windowWidth;
+        this._windowHeight = windowHeight;
         this._radii = radii;
         this._context = context;
     }
 
-    draw(context: CanvasRenderingContext2D = this.context) {
-        context.beginPath();
-        context.strokeStyle = 'rgb(192, 213, 0)';
-        context.fillStyle = 'rgb(192, 213, 0)';
-        context.roundRect(this.xPosition, this.yPosition, this.width, this.height, [this.radii])
-        context.stroke()
-        context.fill()
-        context.closePath();
+    draw() {
+        this.context.beginPath();
+        this.context.strokeStyle = 'rgb(192, 213, 0)';
+        this.context.fillStyle = 'rgb(192, 213, 0)';
+        this.context.roundRect(this.xPosition, this.yPosition, this.width, this.height, [this.radii])
+        this.context.stroke()
+        this.context.fill()
+        this.context.closePath();
+    }
+
+    update() {
+        this.context.clearRect(0, 0, this.windowWidth, this.windowHeight);
+        this.draw();
     }
 
     get xPosition(): number {
@@ -41,6 +51,14 @@ export class Platform {
 
     get height(): number {
         return this._height;
+    }
+
+    get windowWidth(): number {
+        return this._windowWidth;
+    }
+
+    get windowHeight(): number {
+        return this._windowHeight;
     }
 
     get radii(): number {
